@@ -56,9 +56,6 @@ router.route('/disease')
     })
     .post(cors(),(req, res) => {
         try {
-
-
-
             const data = {
                 id: req.body.id,
                 name: req.body.name,
@@ -67,26 +64,10 @@ router.route('/disease')
                 address: req.body.address
             }
 
-            // const model = new Model({
-            //     _id: new mongoose.Types.ObjectId(),
-            //     name: req.body.name,
-            //     address: req.body.address
-
-            // })
-            // model.save()
-            //     .then(result => {
-            //         console.log(result);
-            //     })
-            //     .catch(err => console.log(err))
-
             MongoClient.connect(url, function (err, db) {
                 if (err) throw err;
                 var dbo = db.db("admin");
-                // dbo.createCollection("customers", function(err, res) {
-                //   if (err) throw err;
-                //   console.log("Collection created!");
-                //   db.close();
-                // });
+      
                 dbo.collection("customers").insertOne(data, function (err, result) {
                     if (err) throw err;
                     console.log("1 document inserted");
